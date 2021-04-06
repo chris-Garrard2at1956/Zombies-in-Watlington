@@ -1,0 +1,82 @@
+<!--Zombie Apocalypse Game Coderdojo Project-->
+<html>
+  <head>
+  <style>
+#zombie_map {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    background-color: grey;
+}
+</style>
+    <title>Where's Zombie?</title>
+  </head>
+  
+  <body>
+    My zombie map
+<div id="zombie_map"></div>
+<script>
+    var zombie_map;
+	var all_markers = [];
+	var data = `51.64572572566289 -1.007245328063966 Dave4.png
+51.64475594218308 -1.0047669669342052 Dave4.png
+51.64162453228049 -0.9964270849280932 firstAidBag2.png
+51.645812272824976 -1.0032792347823327 Dave4.png
+51.646389249615694 -1.0069878359985363 firstAidBag2.png
+51.64280965549075 -1.005643155103264 firstAidBag2.png
+51.646673296996376 -1.0023529788208019 firstAidBag2.png
+51.6429028661147 -1.0038550158691417 weapons3.png
+51.64508246573665 -1.00837503655538 weapons3.png
+51.64373509533551 -1.0010905522261804 Dave4.png
+51.64433681122545 -1.0089973090468352 Dave4.png`;
+var markers = data.split("\n");
+	
+	
+
+    function initMap() {
+
+            zombie_map = new google.maps.Map(document.getElementById('zombie_map'), {
+            zoom: 16,
+            center: {lat: 51.645040, lng: -1.004370}
+        });
+		
+		if(navigator.geolocation) {
+			navigator.geolocation.watchPosition(set_my_position);
+}
+		else {
+			alert("Geolocation doesn't work in your browser");
+}
+
+	for(var i=0; i < markers.length; i++){
+    var marker_data = markers[i].trim();
+	marker_data = marker_data.split(" ");
+	var latitude = marker_data[0];
+	var longitude = marker_data[1];
+	var emoji = marker_data[2];
+	var marker_position = new google.maps.LatLng(latitude, longitude);
+	var marker = new google.maps.Marker({
+  position: marker_position,
+  map: zombie_map,
+  icon: emoji
+});
+	all_markers.push(marker);
+}
+    }
+	function set_my_position(position){
+	var emoji = "catFace1.png";
+	var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	var marker = new google.maps.Marker({
+  position: pos,
+  map: zombie_map,
+  icon: emoji
+});
+}
+</script>
+<script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUFXR9PB3TSzwbQ3KBsdYv7QEAGLJGFfg&callback=initMap">
+ </script>
+  </body>
+</html>
+
