@@ -19,6 +19,7 @@
 <div id="zombie_map"></div>
 <script>
     var zombie_map;
+	var old_position;
 	var all_markers = [];
 	var data = `51.64572572566289 -1.007245328063966 Dave4.png
 51.64475594218308 -1.0047669669342052 Dave4.png
@@ -48,6 +49,14 @@ var markers = data.split("\n");
 		else {
 			alert("Geolocation doesn't work in your browser");
 }
+	var lat = "51.645040";
+	var lng = "-1.004370";
+	var marker_pos = new google.maps.LatLng(lat, lng);
+	old_position = new google.maps.Marker({
+  position: marker_pos,
+  map: zombie_map,
+});
+	
 
 	for(var i=0; i < markers.length; i++){
     var marker_data = markers[i].trim();
