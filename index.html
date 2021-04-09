@@ -61,11 +61,13 @@ var markers = data.split("\n");
   map: zombie_map,
   icon: emoji
 });
+	
 	all_markers.push(marker);
 }
+	
     }
 	function set_my_position(position){
-	old_position.setMap(null);
+	
 	var emoji = "catFace1.png";
 	var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	var marker = new google.maps.Marker({
@@ -73,7 +75,7 @@ var markers = data.split("\n");
   map: zombie_map,
   icon: emoji
 });
-	old_position = marker;
+	
 }
 </script>
 <script async defer
